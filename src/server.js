@@ -1,17 +1,20 @@
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-const morgan = require('morgan');
-const compression = require('compression');
-const session = require('express-session');
+import express from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import morgan from 'morgan';
+import compression from 'compression';
+import session from 'express-session';
 
 // Import models and admin configuration
-const { sequelize } = require('./models');
-const { adminRouter } = require('./config/admin');
-const apiRoutes = require('./routes');
-const { handleValidationErrors, requestLogger, securityHeaders } = require('./middleware/validation');
+import db from './models/index.js';
+import { adminRouter } from './config/admin.js';
+import apiRoutes from './routes/index.js';
+import { handleValidationErrors, requestLogger, securityHeaders } from './middleware/validation.js';
+
+const { sequelize } = db;
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -86,7 +89,7 @@ app.get('/', (req, res) => {
 });
 
 // 404 handler
-app.all('*', (req, res) => {
+app.use((req, res) => {
     res.status(404).json({
         success: false,
         message: 'Endpoint not found',

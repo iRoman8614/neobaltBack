@@ -1,7 +1,7 @@
 /**
  * Middleware для обработки ошибок валидации Sequelize
  */
-exports.handleValidationErrors = (error, req, res, next) => {
+export const handleValidationErrors = (error, req, res, next) => {
     if (error.name === 'SequelizeValidationError') {
         const validationErrors = error.errors.map(err => ({
             field: err.path,
@@ -44,7 +44,7 @@ exports.handleValidationErrors = (error, req, res, next) => {
 /**
  * Middleware для логирования запросов в development режиме
  */
-exports.requestLogger = (req, res, next) => {
+export const requestLogger = (req, res, next) => {
     if (process.env.NODE_ENV === 'development') {
         console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`, {
             query: req.query,
@@ -57,7 +57,7 @@ exports.requestLogger = (req, res, next) => {
 /**
  * Middleware для установки заголовков безопасности
  */
-exports.securityHeaders = (req, res, next) => {
+export const securityHeaders = (req, res, next) => {
     // Предотвращение XSS атак
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('X-Frame-Options', 'DENY');

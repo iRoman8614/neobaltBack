@@ -1,6 +1,8 @@
-const { Product, Category, Manufacturer } = require('../models');
-const { Op } = require('sequelize');
-const Joi = require('joi');
+import db from '../models/index.js';
+import { Op } from 'sequelize';
+import Joi from 'joi';
+
+const { Product, Category, Manufacturer } = db;
 
 // Схема валидации для получения списка товаров
 const getProductsSchema = Joi.object({
@@ -22,7 +24,7 @@ const getProductByIdSchema = Joi.object({
  * Получение списка товаров с фильтрацией и пагинацией
  * GET /api/products
  */
-exports.getProducts = async (req, res) => {
+export const getProducts = async (req, res) => {
     try {
         // Валидация параметров запроса
         const { error, value: validatedQuery } = getProductsSchema.validate(req.query);
@@ -152,7 +154,7 @@ exports.getProducts = async (req, res) => {
  * Получение товара по ID
  * GET /api/products/:id
  */
-exports.getProductById = async (req, res) => {
+export const getProductById = async (req, res) => {
     try {
         // Валидация параметра ID
         const { error, value: validatedParams } = getProductByIdSchema.validate(req.params);

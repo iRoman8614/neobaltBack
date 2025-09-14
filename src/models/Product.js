@@ -1,9 +1,6 @@
+import { Model } from 'sequelize';
 
-'use strict';
-
-const { Model } = require('sequelize');
-
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
     class Product extends Model {
         static associate(models) {
             // Связь многие к одному с категорией
@@ -88,6 +85,7 @@ module.exports = (sequelize, DataTypes) => {
             comment: 'URL превью изображения для каталога',
             validate: {
                 isUrl: {
+                    args: true,
                     msg: 'Некорректный URL превью изображения'
                 },
                 len: {
@@ -102,6 +100,7 @@ module.exports = (sequelize, DataTypes) => {
             comment: 'URL первого дополнительного изображения',
             validate: {
                 isUrl: {
+                    args: true,
                     msg: 'Некорректный URL первого изображения'
                 },
                 len: {
@@ -116,6 +115,7 @@ module.exports = (sequelize, DataTypes) => {
             comment: 'URL второго дополнительного изображения',
             validate: {
                 isUrl: {
+                    args: true,
                     msg: 'Некорректный URL второго изображения'
                 },
                 len: {
@@ -130,6 +130,7 @@ module.exports = (sequelize, DataTypes) => {
             comment: 'URL третьего дополнительного изображения',
             validate: {
                 isUrl: {
+                    args: true,
                     msg: 'Некорректный URL третьего изображения'
                 },
                 len: {
@@ -144,6 +145,7 @@ module.exports = (sequelize, DataTypes) => {
             comment: 'URL четвертого дополнительного изображения',
             validate: {
                 isUrl: {
+                    args: true,
                     msg: 'Некорректный URL четвертого изображения'
                 },
                 len: {

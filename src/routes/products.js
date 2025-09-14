@@ -1,6 +1,7 @@
-const express = require('express');
+import express from 'express';
+import { getProducts, getProductById } from '../controllers/productsController.js';
+
 const router = express.Router();
-const productsController = require('../controllers/productsController');
 
 /**
  * @route   GET /api/products
@@ -14,7 +15,7 @@ const productsController = require('../controllers/productsController');
  * @params  sortOrder - направление сортировки (ASC, DESC)
  * @access  Public
  */
-router.get('/', productsController.getProducts);
+router.get('/', getProducts);
 
 /**
  * @route   GET /api/products/:id
@@ -22,6 +23,6 @@ router.get('/', productsController.getProducts);
  * @params  id - ID товара
  * @access  Public
  */
-router.get('/:id', productsController.getProductById);
+router.get('/:id', getProductById);
 
-module.exports = router;
+export default router;
